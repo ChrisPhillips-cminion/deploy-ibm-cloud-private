@@ -17,7 +17,7 @@ resource "aws_s3_bucket_object" "hostfile" {
   key    = "hosts"
   content = <<EOF
 [master]
-${join("\n", formatlist("%v", aws_network_interface.mastervip.*.private_ip))}
+${aws_network_interface.mastervip[0].private_ip}
 
 [proxy]
 ${join("\n", formatlist("%v", aws_network_interface.proxyvip.*.private_ip))}
